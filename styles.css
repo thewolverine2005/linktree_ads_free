@@ -1,11 +1,11 @@
 /* ==========================================================================
-   Soham Ghosh - Clean, Light-Mode Link-in-Bio Page
-   Simple, High Contrast, Crisp Typography, Zero Watermarks
+   Soham Ghosh - Link-in-Bio Page
+   Fully Responsive Design System (Mobile, Tablet, Desktop)
    ========================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
 
-/* --- Root Design Tokens (Simple Light Mode) --- */
+/* --- Root Variables & Tokens --- */
 :root {
   --bg-page: #f8fafc;
   --bg-card: #ffffff;
@@ -16,7 +16,7 @@
 
   --text-primary: #0f172a;
   --text-secondary: #475569;
-  --text-muted: #64748b;
+  --text-muted: #94a3b8;
 
   --accent-color: #2563eb;
   --accent-hover: #1d4ed8;
@@ -28,15 +28,15 @@
   --radius-md: 16px;
   --radius-full: 9999px;
 
-  --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.05), 0 1px 2px rgba(15, 23, 42, 0.03);
-  --shadow-md: 0 4px 12px rgba(15, 23, 42, 0.08);
-  --shadow-lg: 0 10px 25px rgba(15, 23, 42, 0.1);
+  --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(15, 23, 42, 0.04);
+  --shadow-md: 0 4px 14px rgba(15, 23, 42, 0.08);
+  --shadow-lg: 0 10px 25px rgba(15, 23, 42, 0.12);
 
-  --max-width: 600px;
+  --max-width: 580px;
   --transition: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* --- Global Reset --- */
+/* --- Global Reset & Box Sizing --- */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -46,6 +46,7 @@
 html {
   font-size: 16px;
   -webkit-tap-highlight-color: transparent;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -54,13 +55,15 @@ body {
   color: var(--text-primary);
   line-height: 1.5;
   min-height: 100vh;
+  min-height: 100dvh; /* Dynamic viewport height for mobile browsers */
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 40px 16px;
+  padding: clamp(24px, 5vh, 48px) clamp(14px, 4vw, 24px);
+  overflow-x: hidden;
 }
 
-/* --- Container --- */
+/* --- Main Layout Container --- */
 .container {
   width: 100%;
   max-width: var(--max-width);
@@ -68,23 +71,24 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 28px;
+  gap: clamp(20px, 4vw, 28px);
 }
 
-/* --- Profile Section --- */
+/* --- Profile Header Section --- */
 .profile-section {
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
+  gap: 14px;
   width: 100%;
 }
 
 .avatar-wrapper {
   position: relative;
-  width: 110px;
-  height: 110px;
+  width: clamp(90px, 22vw, 114px);
+  height: clamp(90px, 22vw, 114px);
+  flex-shrink: 0;
 }
 
 .avatar-img {
@@ -100,46 +104,53 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
+  width: 100%;
 }
 
 .name-heading {
-  font-size: 1.75rem;
+  font-size: clamp(1.45rem, 5vw, 1.85rem);
   font-weight: 800;
   letter-spacing: -0.02em;
   color: var(--text-primary);
+  line-height: 1.25;
 }
 
 .title-tag {
-  font-size: 1rem;
+  font-size: clamp(0.875rem, 2.8vw, 0.975rem);
   font-weight: 600;
   color: var(--accent-color);
   background: var(--accent-light);
   padding: 4px 14px;
   border-radius: var(--radius-full);
   border: 1px solid rgba(37, 99, 235, 0.15);
+  display: inline-block;
 }
 
 /* --- Social Icons Row --- */
 .social-icons-row {
   display: flex;
   justify-content: center;
-  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: clamp(10px, 3vw, 14px);
+  width: 100%;
 }
 
 .social-icon-btn {
-  width: 44px;
-  height: 44px;
+  width: clamp(42px, 11vw, 46px);
+  height: clamp(42px, 11vw, 46px);
   border-radius: var(--radius-full);
   background: var(--bg-card);
   border: 1px solid var(--border-color);
   color: var(--text-primary);
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   text-decoration: none;
   box-shadow: var(--shadow-sm);
   transition: all var(--transition);
+  flex-shrink: 0;
 }
 
 .social-icon-btn:hover {
@@ -148,6 +159,10 @@ body {
   color: #ffffff;
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
+}
+
+.social-icon-btn:active {
+  transform: translateY(0);
 }
 
 .social-icon-btn svg {
@@ -160,7 +175,7 @@ body {
 .links-stack {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: clamp(10px, 2.5vw, 14px);
   width: 100%;
 }
 
@@ -168,7 +183,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 16px 20px;
+  padding: clamp(14px, 3.5vw, 18px) clamp(16px, 4vw, 22px);
   background: var(--bg-card);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
@@ -176,6 +191,8 @@ body {
   text-decoration: none;
   box-shadow: var(--shadow-sm);
   transition: all var(--transition);
+  min-height: 54px; /* Optimal touch target */
+  width: 100%;
 }
 
 .link-btn:hover {
@@ -187,12 +204,15 @@ body {
 
 .link-btn:active {
   transform: translateY(0);
+  background: var(--bg-card-active);
 }
 
 .link-left {
   display: flex;
   align-items: center;
   gap: 14px;
+  min-width: 0; /* Enables flex item truncation */
+  flex: 1;
 }
 
 .link-icon-box {
@@ -216,23 +236,33 @@ body {
 .link-text {
   display: flex;
   flex-direction: column;
+  gap: 2px;
+  min-width: 0;
 }
 
 .link-title {
-  font-size: 1.05rem;
+  font-size: clamp(0.95rem, 3vw, 1.05rem);
   font-weight: 700;
   color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .link-subtitle {
-  font-size: 0.85rem;
+  font-size: clamp(0.8rem, 2.5vw, 0.875rem);
   color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .arrow-icon {
   width: 18px;
   height: 18px;
   color: var(--text-muted);
+  flex-shrink: 0;
+  margin-left: 10px;
   transition: transform var(--transition), color var(--transition);
 }
 
@@ -247,16 +277,16 @@ body {
   background: var(--bg-card);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
-  padding: 18px 20px;
+  padding: clamp(14px, 3.5vw, 18px) clamp(16px, 4vw, 20px);
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 14px;
   box-shadow: var(--shadow-sm);
 }
 
 .music-cover {
-  width: 52px;
-  height: 52px;
+  width: 50px;
+  height: 50px;
   border-radius: var(--radius-sm);
   object-fit: cover;
   flex-shrink: 0;
@@ -276,7 +306,7 @@ body {
 }
 
 .music-title {
-  font-size: 1rem;
+  font-size: clamp(0.9rem, 2.8vw, 1rem);
   font-weight: 700;
   color: var(--text-primary);
   white-space: nowrap;
@@ -285,8 +315,11 @@ body {
 }
 
 .music-artist {
-  font-size: 0.85rem;
+  font-size: 0.825rem;
   color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .music-play-btn {
@@ -309,13 +342,17 @@ body {
   transform: scale(1.06);
 }
 
+.music-play-btn:active {
+  transform: scale(0.96);
+}
+
 .music-play-btn svg {
   width: 20px;
   height: 20px;
   fill: currentColor;
 }
 
-/* Toast alert */
+/* Toast alert notification */
 .toast-msg {
   position: fixed;
   bottom: 24px;
@@ -325,24 +362,51 @@ body {
   color: #ffffff;
   padding: 10px 20px;
   border-radius: var(--radius-full);
-  font-size: 0.9rem;
+  font-size: 0.875rem;
   font-weight: 600;
   box-shadow: var(--shadow-lg);
   z-index: 100;
   transition: opacity 0.3s ease;
+  white-space: nowrap;
 }
 
-/* Responsive */
-@media (max-width: 480px) {
+/* --- Media Queries for Specific Device Width Breakpoints --- */
+
+/* Small Mobile Screens (320px - 380px) */
+@media (max-width: 380px) {
   body {
-    padding: 24px 16px;
+    padding: 18px 12px;
   }
   
-  .name-heading {
-    font-size: 1.5rem;
+  .link-btn {
+    padding: 12px 14px;
   }
 
-  .link-btn {
-    padding: 14px 16px;
+  .link-icon-box {
+    width: 36px;
+    height: 36px;
+  }
+
+  .music-widget {
+    padding: 12px 14px;
+  }
+  
+  .music-cover {
+    width: 44px;
+    height: 44px;
+  }
+}
+
+/* Tablets (481px - 768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+  .container {
+    max-width: 520px;
+  }
+}
+
+/* Larger Displays / Desktop (>769px) */
+@media (min-width: 769px) {
+  .container {
+    max-width: 560px;
   }
 }
